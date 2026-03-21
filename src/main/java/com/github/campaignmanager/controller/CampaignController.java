@@ -1,16 +1,27 @@
 package com.github.campaignmanager.controller;
 
 import com.github.campaignmanager.dto.request.CampaignCreateRequest;
+import com.github.campaignmanager.dto.request.CampaignUpdateRequest;
 import com.github.campaignmanager.dto.response.CampaignResponse;
 import com.github.campaignmanager.service.CampaignService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +31,9 @@ public class CampaignController {
     private final CampaignService campaignService;
 
     @PostMapping("/campaigns")
-    ResponseEntity<CampaignResponse> createCampaign(@Valid @RequestBody CampaignCreateRequest request) {
+    ResponseEntity<CampaignResponse> createCampaign(
+            @Valid @RequestBody CampaignCreateRequest request
+    ) {
         CampaignResponse response = campaignService.createCampaign(request);
 
         return ResponseEntity
@@ -28,5 +41,49 @@ public class CampaignController {
                 .body(response);
     }
 
+    @PatchMapping("/campaigns/{campaignId}")
+    ResponseEntity<CampaignResponse> updateCampaign(
+            @PathVariable UUID campaignId,
+            @Valid @RequestBody CampaignUpdateRequest request
+    ) {
+        CampaignResponse response = campaignService.updateCampaign(campaignId, request);
 
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
+    }
+
+    @GetMapping("/campaigns")
+    ResponseEntity<Page<CampaignResponse>> getAllCampaigns(
+            @PageableDefault(sort = "campaignName", direction = Sort.Direction.ASC, size = 5) Pageable pageable
+
+    ) {
+        Page<CampaignResponse> response = campaignService.getAllCampaigns(pageable);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
+    }
+
+    @GetMapping("/campaigns/{campaignId}")
+    ResponseEntity<CampaignResponse> getCampaign(
+            @PathVariable UUID campaignId
+    ) {
+        CampaignResponse response = campaignService.getCampaign(campaignId);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
+    }
+
+    @DeleteMapping("/campaigns/{campaignId}")
+    ResponseEntity<Void> deleteCampaign(
+            @PathVariable UUID campaignId
+    ) {
+        campaignService.deleteCampaign(campaignId);
+
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .build();
+    }
 }

@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Component
 public class CampaignMapper {
+
     public Optional<CampaignResponse> toResponse(Campaign campaign) {
         return Optional.ofNullable(campaign)
                 .map(c -> CampaignResponse.builder()
