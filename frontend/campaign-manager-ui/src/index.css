@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  --bg-color: #121d33;      /* Bardzo ciemny granat (Slate 900) */
+  --card-bg: #1f2937;       /* Ciemny szary (Slate 800) */
+  --text-primary: #cd6161;  /* Prawie biały (Gray 100) */
+  --text-secondary: #9ca3af; /* Szary (Gray 400) */
+
+  --emerald-primary: #10b981; /* Główny szmaragd (Emerald 500) */
+  --emerald-hover: #059669;   /* Ciemniejszy szmaragd (Emerald 600) */
+  --emerald-light: #6ee7b7;   /* Jasny szmaragd (Emerald 300) */
+
+  --danger: #ef4444;        /* Czerwony błędu */
+  --input-bg: #574ad9;      /* Tło inputów (Slate 700) */
+  --input-border: #b750e1;  /* Border inputów (Slate 600) */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif; /* Profesjonalna czcionka */
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Przycisk ogólny --- */
+.btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.btn:active { transform: translateY(1px); }
+
+/* --- Input ogólny --- */
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box; /* Ważne dla paddingu */
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--emerald-primary);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
