@@ -4,6 +4,7 @@ import com.github.campaignmanager.dto.request.CampaignCreateRequest;
 import com.github.campaignmanager.dto.request.CampaignUpdateRequest;
 import com.github.campaignmanager.dto.response.CampaignResponse;
 import com.github.campaignmanager.exception.InsufficientFundsException;
+import com.github.campaignmanager.exception.WrongBidAmountException;
 import com.github.campaignmanager.mapper.CampaignMapper;
 import com.github.campaignmanager.model.Campaign;
 import com.github.campaignmanager.repository.CampaignRepository;
@@ -113,7 +114,7 @@ public class CampaignService {
 
     private void checkBidAmount(BigDecimal bidAmount, BigDecimal campaignFund) {
         if (bidAmount.compareTo(campaignFund) > 0) {
-            throw new IllegalStateException("Bid amount cannot be greater than campaign fund");
+            throw new WrongBidAmountException("Bid amount cannot be greater than campaign fund");
         }
     }
 }

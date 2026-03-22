@@ -3,10 +3,12 @@ package com.github.campaignmanager.dto.request;
 import com.github.campaignmanager.model.CampaignStatus;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
+import lombok.Builder;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Builder
 public record CampaignUpdateRequest(
         String campaignName,
         List<String> keywords,
