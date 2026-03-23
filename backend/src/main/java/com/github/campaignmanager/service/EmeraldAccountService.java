@@ -2,6 +2,7 @@ package com.github.campaignmanager.service;
 
 import com.github.campaignmanager.model.EmeraldAccount;
 import com.github.campaignmanager.repository.EmeraldAccountRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,7 @@ public class EmeraldAccountService {
                     account.setBalance(newBalance);
                     return emeraldAccountRepository.save(account);
                 })
-                .orElseThrow(() -> new RuntimeException("Emerald account not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Emerald account not found"));
 
     }
 
@@ -36,7 +37,7 @@ public class EmeraldAccountService {
                 .stream()
                 .findFirst()
                 .map(EmeraldAccount::getBalance)
-                .orElseThrow(() -> new RuntimeException("Emerald account not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Emerald account not found"));
 
     }
 }

@@ -43,7 +43,7 @@ function CampaignForm({ onSuccess, editData, clearEdit, balance }) {
                 setErrors(errorData);
             }
         } catch (error) {
-            console.error("Błąd podczas wysyłania formularza", error);
+            console.error("Error while sending form", error);
         }
     };
 
@@ -67,7 +67,7 @@ function CampaignForm({ onSuccess, editData, clearEdit, balance }) {
                 <CreatableSelect
                     isMulti
                     options={KEYWORD_OPTIONS}
-                    placeholder="Wybierz lub wpisz własne..."
+                    placeholder="Choose or write your own..."
                     styles={customSelectStyles}
                     value={formData.keywords.map(k => ({ value: k, label: k }))}
                     onChange={(selectedItems) => {
@@ -102,11 +102,11 @@ function CampaignForm({ onSuccess, editData, clearEdit, balance }) {
             </div>
 
             <div className="form-group">
-                <label className="form-label">Town / City</label>
+                <label className="form-label">Town</label>
                 <CreatableSelect
                     isClearable
                     options={CITY_OPTIONS}
-                    placeholder="Wybierz miasto..."
+                    placeholder="Choose Town..."
                     styles={customSelectStyles}
                     value={formData.town ? { value: formData.town, label: formData.town } : null}
                     onChange={(selected) => setFormData({ ...formData, town: selected ? selected.value : '' })}

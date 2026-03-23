@@ -8,6 +8,7 @@ import com.github.campaignmanager.exception.WrongBidAmountException;
 import com.github.campaignmanager.mapper.CampaignMapper;
 import com.github.campaignmanager.model.Campaign;
 import com.github.campaignmanager.repository.CampaignRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -103,7 +104,7 @@ public class CampaignService {
 
     private Campaign getCampaignById(UUID campaignId) {
         return campaignRepository.findById(campaignId)
-                .orElseThrow(() -> new IllegalStateException("Campaign not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Campaign not found"));
     }
 
     private void checkEmeraldAccountBalance(BigDecimal amount) {

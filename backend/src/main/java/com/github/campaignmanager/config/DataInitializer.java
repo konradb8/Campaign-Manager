@@ -21,9 +21,7 @@ public class DataInitializer implements CommandLineRunner {
                     .balance(new BigDecimal("10000.00"))
                     .build());
 
-            EmeraldAccount savedAccount = emeraldAccountRepository.save(account);
-
-            System.out.println("Emerald account created with ID: " + savedAccount.getId());
+            emeraldAccountRepository.save(account);
         }
     }
 
